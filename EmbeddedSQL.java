@@ -233,32 +233,6 @@ public class EmbeddedSQL {
       }while (true);
       return input;
    }//end readChoice
-   
-   public static int readInputQ5() {
-      int input;
-      // returns only if a correct value is given.
-      do {
-         System.out.print("Please enter an integer for cost: ");
-         try { // read the integer, parse it and break.
-            input = Integer.parseInt(in.readLine());
-            break;
-         }catch (Exception e) {
-            System.out.println("Your input is invalid!");
-            continue;
-         }//end try
-      }while (true);
-      return input;
-   }//end readChoice
-   
-   public static String readInputQ6() {
-      String input;
-      // returns only if a correct value is given.
-      do {
-         System.out.print("Please enter a text for the part name(Capitalize The First Letter Of Each Word): ");
-         input = in.readLine();
-      }while (true);
-      return input;
-   }//end readChoice
 
    public static void QueryExample(EmbeddedSQL esql){
       try{
@@ -345,7 +319,7 @@ public class EmbeddedSQL {
    public static void Query5(EmbeddedSQL esql){
       // Your code goes here.
       try{
-         String query = "SELECT s.sname, COUNT(*) FROM suppliers s WHERE s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Green') AND s.sname NOT IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color != 'Green') GROUP BY s.sname";
+         String query = "SELECT s.sname, COUNT(c.pid) FROM suppliers s, parts p, catalog c WHERE s.sid=c.sid AND p.pid=c.pid GROUP BY s.sname";
          
 		 int rowCount = esql.executeQuery(query);
 		 if (rowCount == 0){
@@ -353,7 +327,7 @@ public class EmbeddedSQL {
 		 }
 		 else {
 			 System.out.println ("Total row(s): " + rowCount);
-		 }
+		 }		 
       }catch(Exception e){
          System.err.println (e.getMessage());
       }
