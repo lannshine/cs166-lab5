@@ -233,6 +233,32 @@ public class EmbeddedSQL {
       }while (true);
       return input;
    }//end readChoice
+   
+   public static int readInputQ5() {
+      int input;
+      // returns only if a correct value is given.
+      do {
+         System.out.print("Please enter an integer for cost: ");
+         try { // read the integer, parse it and break.
+            input = Integer.parseInt(in.readLine());
+            break;
+         }catch (Exception e) {
+            System.out.println("Your input is invalid!");
+            continue;
+         }//end try
+      }while (true);
+      return input;
+   }//end readChoice
+   
+   public static int readInputQ6() {
+      String input;
+      // returns only if a correct value is given.
+      do {
+         System.out.print("Please enter a text for the part name(Capitalize The First Letter Of Each Word): ");
+         input = in.readLine();
+      }while (true);
+      return input;
+   }//end readChoice
 
    public static void QueryExample(EmbeddedSQL esql){
       try{
@@ -319,9 +345,17 @@ public class EmbeddedSQL {
    public static void Query5(EmbeddedSQL esql){
       // Your code goes here.
       try{
-         String query = "SELECT s.sname, MAX(c.cost) FROM suppliers s, catalog c WHERE s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Green') AND s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Red') GROUP BY s.sname";
-         
-         System.out.println (esql.executeQuery(query));
+         String query = "SELECT DISTINCT p.pname FROM suppliers s, parts p, catalog c WHERE s.sid=c.sid AND p.pid=c.pid AND c.cost < ";
+		 String input = readInputQ5();
+		 query += input;
+		 
+		 int rowCount = esql.executeQuery(query);
+		 if (rowCount == 0){
+			 System.out.println ("No results.");
+		 }
+		 else {
+			 System.out.println ("Total row(s): " + rowCount);
+		 }
       }catch(Exception e){
          System.err.println (e.getMessage());
       }
@@ -329,8 +363,21 @@ public class EmbeddedSQL {
 
    public static void Query6(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
+      try{
+         String query = "SELECT DISTINCT p.pname FROM suppliers s, parts p, catalog c WHERE s.sid=c.sid AND p.pid=c.pid AND c.cost < ";
+		 String input = readInputQ6();
+		 query += input;
+		 
+		 int rowCount = esql.executeQuery(query);
+		 if (rowCount == 0){
+			 System.out.println ("No results.");
+		 }
+		 else {
+			 System.out.println ("Total row(s): " + rowCount);
+		 }
+      }catch(Exception e){
+         System.err.println (e.getMessage());
+      }
    }//end Query6
 
 }//end EmbeddedSQL
