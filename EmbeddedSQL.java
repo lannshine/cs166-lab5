@@ -275,12 +275,14 @@ public class EmbeddedSQL {
       try{
          String query = "SELECT s.sname, COUNT(*) FROM suppliers s WHERE s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Green') AND s.sname NOT IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color != 'Green') GROUP BY s.sname";
          
+ 		 esql.executeQuery(query);
+
 		 if (esql.executeQuery(query) == 0){
 			System.out.println ("No results.");
-		 }
+		 }/*
 		 else {
 			 System.out.println (esql.executeQuery(query));
-		 }
+		 }*/
       }catch(Exception e){
          System.err.println (e.getMessage());
       }
