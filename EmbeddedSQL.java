@@ -343,7 +343,7 @@ public class EmbeddedSQL {
          System.out.print("\tEnter part name(Capitalize The First Letter Of Each Word): ");
          String input = in.readLine();
          query += input;
-		 query += "\'";
+		 query += "\')";
 		 
 		 int rowCount = esql.executeQuery(query);
 		 if (rowCount == 0){
