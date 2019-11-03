@@ -290,13 +290,14 @@ public class EmbeddedSQL {
       // Your code goes here.
       try{
          String query = "SELECT s.sname, MAX(c.cost) FROM suppliers s, catalog c WHERE s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Green') AND s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Red') GROUP BY s.sname";
-         String output = esql.executeQuery(query);
-		 if (output == "0"){
+		 esql.executeQuery(query);
+         //String output = esql.executeQuery(query);
+		 /*if (output == "0"){
 			System.out.println ("No results.");
 		 }
 		 else {
 			 System.out.println (output);
-		 }
+		 }*/
       }catch(Exception e){
          System.err.println (e.getMessage());
       }
