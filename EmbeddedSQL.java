@@ -345,13 +345,13 @@ public class EmbeddedSQL {
    public static void Query5(EmbeddedSQL esql){
       // Your code goes here.
       try{
-         String query = "SELECT DISTINCT p.pname FROM suppliers s, parts p, catalog c WHERE s.sid=c.sid AND p.pid=c.pid AND c.cost < ";
-		 //
+         String query = "SELECT DISTINCT p.pname FROM suppliers s, parts p, catalog c WHERE s.sid=c.sid AND p.pid=c.pid AND c.cost < 1";
+		 /*
          System.out.print("\tEnter cost: $");
          String input = in.readLine();
          query += input;
 		 //String input = readInputQ5();
-		 
+		 */
 		 int rowCount = esql.executeQuery(query);
 		 if (rowCount == 0){
 			 System.out.println ("No results.");
