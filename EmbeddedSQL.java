@@ -339,10 +339,11 @@ public class EmbeddedSQL {
    public static void Query6(EmbeddedSQL esql){
       // Your code goes here.
       try{
-         String query = "SELECT s.address FROM suppliers s WHERE s.address IN(SELECT s.address FROM suppliers s, parts p, catalog c WHERE s.sid=c.sid AND p.pid=c.pid AND p.pname =";
+         String query = "SELECT s.address FROM suppliers s WHERE s.address IN(SELECT s.address FROM suppliers s, parts p, catalog c WHERE s.sid=c.sid AND p.pid=c.pid AND p.pname ='";
          System.out.print("\tEnter part name(Capitalize The First Letter Of Each Word): ");
          String input = in.readLine();
          query += input;
+		 query += "'";
 		 
 		 int rowCount = esql.executeQuery(query);
 		 if (rowCount == 0){
