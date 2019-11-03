@@ -345,13 +345,8 @@ public class EmbeddedSQL {
    public static void Query5(EmbeddedSQL esql){
       // Your code goes here.
       try{
-         String query = "SELECT DISTINCT p.pname FROM suppliers s, parts p, catalog c WHERE s.sid=c.sid AND p.pid=c.pid AND c.cost < 1";
-		 /*
-         System.out.print("\tEnter cost: $");
-         String input = in.readLine();
-         query += input;
-		 //String input = readInputQ5();
-		 */
+         String query = "SELECT s.sname, COUNT(*) FROM suppliers s WHERE s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Green') AND s.sname NOT IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color != 'Green') GROUP BY s.sname";
+         
 		 int rowCount = esql.executeQuery(query);
 		 if (rowCount == 0){
 			 System.out.println ("No results.");
