@@ -261,26 +261,46 @@ public class EmbeddedSQL {
 
    public static void Query2(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
+      try{
+         String query = "SELECT s.sname, COUNT(c.pid) FROM suppliers s, parts p, catalog c WHERE s.sid=c.sid AND p.pid=c.pid GROUP BY s.sname HAVING COUNT(c.pid)>=3";
+         
+         System.out.println (esql.executeQuery(query));
+      }catch(Exception e){
+         System.err.println (e.getMessage());
+      }
    }//end Query2
 
    public static void Query3(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
+      try{
+         String query = "SELECT s.sname, COUNT(*) FROM suppliers s WHERE s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Green') AND s.sname NOT IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color != 'Green') GROUP BY s.sname";
+         
+         System.out.println (esql.executeQuery(query));
+      }catch(Exception e){
+         System.err.println (e.getMessage());
+      }
    }//end Query3
 
    public static void Query4(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
+      try{
+         String query = "SELECT s.sname, MAX(c.cost) FROM suppliers s, catalog c WHERE s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Green') AND s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Red') GROUP BY s.sname";
+         
+         System.out.println (esql.executeQuery(query));
+      }catch(Exception e){
+         System.err.println (e.getMessage());
+      }
    }//end Query4
 
    public static void Query5(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
+      try{
+         String query = "SELECT s.sname, MAX(c.cost) FROM suppliers s, catalog c WHERE s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Green') AND s.sname IN(SELECT s.sname FROM parts p, catalog c, suppliers s WHERE c.sid = s.sid AND c.pid = p.pid AND p.color = 'Red') GROUP BY s.sname";
+         
+         System.out.println (esql.executeQuery(query));
+      }catch(Exception e){
+         System.err.println (e.getMessage());
+      }
    }//end Query5
 
    public static void Query6(EmbeddedSQL esql){
