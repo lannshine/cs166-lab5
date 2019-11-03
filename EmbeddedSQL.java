@@ -250,7 +250,7 @@ public class EmbeddedSQL {
       return input;
    }//end readChoice
    
-   public static int readInputQ6() {
+   public static String readInputQ6() {
       String input;
       // returns only if a correct value is given.
       do {
@@ -346,8 +346,11 @@ public class EmbeddedSQL {
       // Your code goes here.
       try{
          String query = "SELECT DISTINCT p.pname FROM suppliers s, parts p, catalog c WHERE s.sid=c.sid AND p.pid=c.pid AND c.cost < ";
-		 String input = readInputQ5();
-		 query += input;
+		 //
+         System.out.print("\tEnter cost: $");
+         String input = in.readLine();
+         query += input;
+		 //String input = readInputQ5();
 		 
 		 int rowCount = esql.executeQuery(query);
 		 if (rowCount == 0){
