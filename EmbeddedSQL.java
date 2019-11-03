@@ -318,16 +318,11 @@ public class EmbeddedSQL {
 
    public static void Query5(EmbeddedSQL esql){
       // Your code goes here.
-      // ...
-      // ...
-   }//end Query5
-
-   public static void Query6(EmbeddedSQL esql){
-      // Your code goes here.
       try{
          String query = "SELECT DISTINCT p.pname FROM suppliers s, parts p, catalog c WHERE s.sid=c.sid AND p.pid=c.pid AND c.cost < ";
-		 String input = readInputQ6();
-		 query += input;
+         System.out.print("\tEnter cost: $");
+         String input = in.readLine();
+         query += input;
 		 
 		 int rowCount = esql.executeQuery(query);
 		 if (rowCount == 0){
@@ -339,6 +334,12 @@ public class EmbeddedSQL {
       }catch(Exception e){
          System.err.println (e.getMessage());
       }
+   }//end Query5
+
+   public static void Query6(EmbeddedSQL esql){
+      // Your code goes here.
+      // ...
+      // ...
    }//end Query6
 
 }//end EmbeddedSQL
